@@ -8,14 +8,14 @@ spec:
   selector:
     app: nginx
   ports:
-    - port: 443
-      name: https
-      protocol: TCP
-      targetPort: 443
     - port: 80
       name: http
       protocol: TCP
       targetPort: 80
+    - port: 443
+      name: https
+      protocol: TCP
+      targetPort: 443
 
 ---
 
@@ -26,17 +26,17 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: my-nginx
+      app: nginx
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: my-nginx
+        app: nginx
     spec:
       containers:
       - image: nginx-service
-        name: nginx-service
+        name: nginx
         imagePullPolicy: Never
         ports:
         - containerPort: 80

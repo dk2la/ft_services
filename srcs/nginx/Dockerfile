@@ -36,7 +36,7 @@ FROM	alpine:latest
 RUN		apk update
 
 #Install
-RUN		apk add nginx sudo openssh openssl supervisor
+RUN		apk add nginx bash sudo openssl openrc supervisor
 
 #Creating new user and group 'www' for nginx
 RUN		adduser -D -g 'www' www
@@ -45,13 +45,15 @@ RUN		adduser -D -g 'www' www
 RUN		mkdir /www
 RUN		chown -R www:www /var/lib/nginx
 RUN		chown -R www:www /www
-RUN		mkdir /run/nginx
+RUN		mkdir /run/nginx && \
+		touch /run/nginx/nginx.pid && \
+		rm -rf /etc/nginx/conf.d/default.conf
 
 #Supervisord conf
 COPY	./supervisord.conf /etc/supervisord.conf
 
 #Nginx config and index page
-COPY	./nginx.conf /etc/nginx/conf.d/default.conf
+COPY	./nginx.conf /etc/nginx/
 COPY	./index.html /var/www/index.html
 
 #Create SSL key
@@ -68,4 +70,4 @@ EXPOSE	80
 EXPOSE	443
 
 #Starting
-CMD		["usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
+CMD		["/usr/bin/supervisord"]
