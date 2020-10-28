@@ -1,3 +1,4 @@
+
 apiVersion: v1
 kind: Service
 metadata:
@@ -16,9 +17,9 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: mysql-data
+  name: mysql-claim
 spec:
-  storageClassName: mysql-data
+  storageClassName: mysql-volume
   accessModes:
     - ReadWriteOnce
   resources:
@@ -43,9 +44,9 @@ spec:
         app: mysql
     spec:
       volumes:
-      - name: mysql-data
+      - name: mysql-volume
         persistentVolumeClaim:
-          claimName: mysql-data
+          claimName: mysql-claim
       containers:
       - name: mysql
         image: mysql-service
@@ -53,5 +54,5 @@ spec:
         ports:
         - containerPort: 3306
         volumeMounts:
-        - name: mysql-data
+        - name: mysql-volume
           mountPath: /var/lib/

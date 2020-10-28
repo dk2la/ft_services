@@ -21,4 +21,8 @@ kubectl apply -f ./srcs/mysql.yaml
 #build wordpress
 docker build -t wordpress-service ./srcs/wordpress/
 kubectl apply -f ./srcs/wordpress.yaml
+
+#build ftps
+docker build -t ftps-service ./srcs/ftps/
+kubectl apply -f ./srcs/ftps.yaml
 sh
