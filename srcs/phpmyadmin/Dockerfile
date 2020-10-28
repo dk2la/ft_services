@@ -1,6 +1,6 @@
 FROM alpine:latest
 
-RUN		apk add vim openrc openssl supervisor nginx php7 php7-fpm php7-iconv \
+RUN		apk add openrc openssl supervisor nginx php7 php7-fpm php7-iconv \
 		php7-json php7-mbstring php7-mysqli php7-phar php7-session
 RUN		rc-update add php-fpm7 default
 
