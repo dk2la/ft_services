@@ -26,7 +26,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: deployment-ftps
+  name: ftps
 spec:
   selector:
     matchLabels:

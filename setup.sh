@@ -25,4 +25,12 @@ kubectl apply -f ./srcs/wordpress.yaml
 #build ftps
 docker build -t ftps-service ./srcs/ftps/
 kubectl apply -f ./srcs/ftps.yaml
+#build influxdb && telegraf
+docker build -t influxdb-service ./srcs/influxdb
+kubectl apply -f ./srcs/influxdb.yaml
+
+#build grafana
+docker build -t grafana-service ./srcs/grafana
+kubectl apply -f ./srcs/grafana.yaml
+
 sh
