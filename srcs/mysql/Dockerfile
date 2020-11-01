@@ -1,13 +1,14 @@
-FROM	alpine:latest
-RUN		apk add openrc mysql mysql-client
+FROM	    alpine:latest
+RUN	    	apk add openrc mysql mysql-client
 
-COPY	./my.cnf ./etc/mysql/
-COPY	./start.sh ./
+COPY	    ./my.cnf ./etc/mysql/
+COPY	    ./start.sh ./
+COPY        ./wordpress.sql ./
 
-VOLUME	["/var/lib"]
+VOLUME  	["/var/lib"]
 
-EXPOSE	3306
+EXPOSE  	3306
 
-RUN     chmod +x ./start.sh
+RUN         chmod +x ./start.sh
 
 ENTRYPOINT	./start.sh
